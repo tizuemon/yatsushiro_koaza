@@ -12,19 +12,6 @@ header {
   position: sticky;
 }
 
-h1{
-  margin:0;
-}
-
-p {
-  padding: 130px 0px;
-  height: 500px;
-}
- 
-.title {
-  margin-right: auto;
-}
-
 
 body {
   height: 100%;
