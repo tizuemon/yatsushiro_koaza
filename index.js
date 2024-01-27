@@ -1,10 +1,11 @@
-const map = L.map("map").setView([35.6727, 139.662], 14);
+const map = L.map("map").setView([32.507,130.602], 14);
 
-L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png", {
+L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
   attribution:
     "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
 }).addTo(map);
 
+/*
 L.vectorGrid
   .protobuf(
     "https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap/{z}/{x}/{y}.pbf",
@@ -51,3 +52,4 @@ L.vectorGrid
     }
   )
   .addTo(map);
+*/
