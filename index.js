@@ -19,7 +19,20 @@ const polygonStyleOptions = {
 fetch("yatsushiro_koaza.geojson")
   .then((response) => response.json())
   .then((data) => {
-    L.geoJSON(data, polygonStyleOptions).addTo(map);
+    L.geoJSON(data, {
+      
+      // カスタムアイコンを設定する
+      pointToLayer: function(feature, latlng) {
+        return L.marker(latlng, {icon: customIcon});
+      },
+      // ポップアップを表示する
+      onEachFeature: function(feature, layer){
+        // 地物の名前を取り出す
+        let name = feature.properties.新小字名;
+        // ポップアップに名前を表示する
+        layer.bindPopup(name);
+        
+      }).addTo(map);
   });
 
 
