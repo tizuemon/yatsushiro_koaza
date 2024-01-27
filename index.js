@@ -5,6 +5,24 @@ L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
     "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
 }).addTo(map);
 
+
+// ポリゴンのスタイル設定
+const polygonStyleOptions = {
+  color: "#810FCB",
+  opacity: 1.0,
+  weight: 2.0,
+  fillColor: "#810FCB",
+  fillOpacity: 0.5,
+};
+
+// GeoJSONファイルの表示
+fetch("yatsushiro_koaza.geojson")
+  .then((response) => response.json())
+  .then((data) => {
+    L.geoJSON(data, polygonStyleOptions).addTo(map);
+  });
+
+
 /*
 L.vectorGrid
   .protobuf(
