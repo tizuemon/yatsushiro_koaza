@@ -16,7 +16,7 @@ const polygonStyleOptions = {
 };
 
 // GeoJSONファイルの表示
-fetch("yatushiro_koaza.geojson")
+fetch("yatsushiro_koaza.geojson")
   .then((response) => response.json())
   .then((data) => {
     L.geoJSON(data, polygonStyleOptions).addTo(map);
