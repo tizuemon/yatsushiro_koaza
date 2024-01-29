@@ -18,6 +18,11 @@ h1{
   font-size:8vmin;
 }
 
+.logo{
+  height:10%;
+  text-algin:center;
+}
+
 .map{
   height: 100%;
   position: absolute;
