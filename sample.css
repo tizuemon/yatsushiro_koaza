@@ -16,6 +16,7 @@ header {
 h1{
   font-family:'Zen Maru Gothic', serif;
   font-size:8vmin;
+  left:auto;
 }
 
 .map{
