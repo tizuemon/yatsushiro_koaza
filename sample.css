@@ -1,11 +1,12 @@
 html {
   height: 100%;
+  width:auto;
 }
 
 
 header {
   display: flex;
-  width: 100%;
+  width: auto;
   height: 15%;
   background-color: rgba(255,255,255,0.7);
   align-items: center;
@@ -34,6 +35,7 @@ h1{
 
 body {
   height: 100%;
+  width:auto;
   margin: 0;
   padding:0;
 }
