@@ -23,12 +23,7 @@ fetch("yatsushiro_koaza.geojson")
   });
 
 
-// Limit map extent
-let bounds = [
-  [120, 20], // [west, south]
-  [155, 47]  // [east, north]
-  ];
-L.setMaxBounds(bounds);
+
 
 /*
 L.vectorGrid
