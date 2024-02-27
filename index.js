@@ -5,7 +5,6 @@ L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
     "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
 }).addTo(map);
 
-
 function getColor(d) {
   return d > 70 ? '#800026' :
     d > 60 ? '#7FC817' :
