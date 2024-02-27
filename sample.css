@@ -41,3 +41,27 @@ body {
   margin: 0;
   padding:0;
 }
+
+
+.divicon1{ 
+  /* background:white; */
+  text-align: center;
+  /* font-size: 12px; */
+  /* text-stroke: 1px #8b0000; */
+  
+  /* color:#000; */
+  /* -webkit-text-stroke: 0.1px #fff;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-fill-color: #000; */
+
+
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+
+  /* font-family:'Zen Maru Gothic', serif; */
+  color: #000;
+  text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff;
+
+}
