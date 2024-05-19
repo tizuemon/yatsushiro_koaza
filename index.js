@@ -77,7 +77,7 @@ function polygonstyle(feature) {
 }
 
 // geoJSON koaza 読み込み
-$.getJSON("20240429_yatsushiro_koaza.geojson", function (data) {
+$.getJSON("20240519_yatsushiro_koaza.geojson", function (data) {
 
   border = L.geoJson(data, {
 
@@ -136,7 +136,7 @@ function oaza_polygonstyle(feature) {
 
 
 // geoJSON oaza 読み込み
-$.getJSON("20240428_yatsushiro_oaza.geojson", function (data) {
+$.getJSON("20240519_yatsushiro_oaza.geojson", function (data) {
 
   oaza_border = L.geoJson(data, {
 
