@@ -3,23 +3,28 @@ const map = L.map("map").setView([32.507, 130.602], 15);
 
 // 地理院地図のレイヤー設定
 const paleMap = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", {
-  attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+  attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
+  opacity: 0.5 // 不透明度を0.7に設定
 }).addTo(map);
 
 const standardMap = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
-  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>"
+  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>",
+  opacity: 0.5 // 不透明度を0.7に設定
 });
 
 const reliefMap = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png", {
-  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>"
+  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>",
+  opacity: 0.5 // 不透明度を0.7に設定
 });
 
 const photoMap = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg", {
-  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>"
+  attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>",
+  opacity: 0.5 // 不透明度を0.7に設定
 });
 
 const osmMap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+  attribution: "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
+  opacity: 0.5 // 不透明度を0.7に設定
 });
 
 // レイヤーコントロールの追加
@@ -39,6 +44,7 @@ L.control.scale({
   imperial: false,
   metric: true
 }).addTo(map);
+
 
 // 色分け関数
 function getColor(d) {
@@ -85,6 +91,21 @@ function polygonStyle(feature) {
   };
 }
 
+// ポリゴンの中心を計算する関数
+function getCentroid(latlngs) {
+  let latSum = 0, lngSum = 0, numPoints = 0;
+
+  latlngs.forEach(latlngArray => {
+    latlngArray.forEach(latlng => {
+      latSum += latlng.lat;
+      lngSum += latlng.lng;
+      numPoints++;
+    });
+  });
+
+  return [latSum / numPoints, lngSum / numPoints];
+}
+
 // 小字ポリゴンの読み込みと表示
 let koazaMarkers = [];
 
@@ -94,23 +115,29 @@ $.getJSON("20240721_yatsushiro_koaza.geojson", function (data) {
     onEachFeature: function (feature, layer) {
       const koazaName = feature.properties.新小字名;
       const oazaName = feature.properties.大字名;
-      const lat = feature.properties.lat;
-      const lon = feature.properties.lon;
+
+      // ポリゴンの座標を取得
+      const latlngs = layer.getLatLngs();
+      console.log(`LatLngs for ${koazaName}:`, latlngs); // デバッグ用
+
+      // ポリゴンの中心を計算
+      const centroid = getCentroid(latlngs[0]);
+      console.log(`Centroid for ${koazaName}:`, centroid); // デバッグ用
 
       const divIconKoaza = L.divIcon({
         html: koazaName,
         className: 'divicon_koaza',
-        iconSize: [50, 50],
-        iconAnchor: [20, 20],
+        iconSize: [80, 80],
+        iconAnchor: [10, 10], // 中心にアンカーを設定
         popupAnchor: [0, 0]
       });
-
-      const marker = L.marker([lat, lon], { icon: divIconKoaza }).addTo(map);
+      const marker = L.marker(centroid, { icon: divIconKoaza }).addTo(map);
       koazaMarkers.push(marker);
       layer.bindPopup(`大字 ： ${oazaName}<br>小字 ： ${koazaName}`);
     }
   }).addTo(map);
 });
+
 
 // 大字ポリゴンスタイル設定
 function oazaPolygonStyle(feature) {
@@ -120,6 +147,18 @@ function oazaPolygonStyle(feature) {
     fillOpacity: 0
   };
 }
+
+// ズームレベルに応じたラベルの表示・非表示
+map.on('zoomend', function() {
+  const zoomLevel = map.getZoom();
+  koazaMarkers.forEach(marker => {
+    if (zoomLevel < 15) {
+      map.removeLayer(marker);
+    } else {
+      map.addLayer(marker);
+    }
+  });
+});
 
 // 大字ポリゴンの読み込みと表示
 // $.getJSON("yatsushiro_oaza.geojson", function (data) {
@@ -142,15 +181,3 @@ function oazaPolygonStyle(feature) {
 //     }
 //   }).addTo(map);
 // });
-
-// ズームレベルに応じたラベルの表示・非表示
-map.on('zoomend', function() {
-  const zoomLevel = map.getZoom();
-  koazaMarkers.forEach(marker => {
-    if (zoomLevel < 15) {
-      map.removeLayer(marker);
-    } else {
-      map.addLayer(marker);
-    }
-  });
-});
