@@ -1,0 +1,93 @@
+/* 共通スタイル */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  height: 15%;
+  background-color: rgba(255, 255, 255, 0.7);
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+}
+
+h1 {
+  font-family: 'Zen Maru Gothic', serif;
+  font-size: 8vmin;
+}
+
+.map {
+  height: 100%;
+  position: relative;
+}
+
+/*不透明度スケール*/
+.opacitySlider { 
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+  z-index: 1000;
+}
+
+.divicon_koaza, .divicon_oaza {
+  text-align: center;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 900;
+  position: absolute;
+  text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff;
+}
+
+.divicon_koaza {
+  color: #000000;
+  opacity: 0.9;
+}
+
+.divicon_oaza {
+  color: #0048e4;
+  opacity: 0.7;
+  font-size: 1.5em;
+}
+
+/* スマホ用スタイル */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 6vmin;
+  }
+
+  .map {
+    height: calc(100% - 60px); /* ヘッダーの高さを引いた値に調整 */
+  }
+
+  .divicon_koaza, .divicon_oaza {
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    position: absolute;
+    text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff;
+  }
+  
+  .divicon_koaza {
+    color: #000000;
+    opacity: 0.9;
+    font-size: 1.5em;
+  }
+  
+  .divicon_oaza {
+    color: #0048e4;
+    opacity: 0.7;
+    font-size: 1.5em;
+  }
+
+
+}
